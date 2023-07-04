@@ -142,10 +142,10 @@
 	        margin: 0 auto;
 	        max-width: 700px; /* Adjust the max-width as needed */
 		}
-        
     </style>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <script>
     var rzp;
     var timer;
@@ -182,9 +182,9 @@ function cancelPayment(){
     function openCheckout() {
         amt = document.getElementById("tid").value;
         console.log("amount in payment options jsp " + amt);
-        
-        function handleOrder(orderId) {
-            const expirationTime = 3 * 60 * 1000;
+            function handleOrder(orderId) {
+            var expirationTime = 3 * 60 * 1000;
+            alert("payment page will expire in 3 minutes");
             console.log("time started" + expirationTime);
             var options = {
                 key: "rzp_test_Eu94k5nuplVQzA",
@@ -222,8 +222,7 @@ function cancelPayment(){
                     backdropclose: false
                 }
             };
-            
-
+           
             // Start the timer
              timer = setTimeout(function() {
             	 toastr.options = {
@@ -256,7 +255,6 @@ function cancelPayment(){
             }, expirationTime);
 
             rzp = new Razorpay(options);
-            
             rzp.open();
             rzp.on('payment.failed', function(response) {
             	 toastr.options = {
@@ -321,7 +319,7 @@ function cancelPayment(){
 <body>
 <br/>
    <b><h3 align="center">Order Summary</h3></b>
-    <div id="id1">
+   <div id="id1">
         <div class="container mt-5">
             <div class="row mt-4">
                 <% custCredModel cust1 = (custCredModel) session.getAttribute("customer");
